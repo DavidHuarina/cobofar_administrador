@@ -23,7 +23,7 @@ switch ($codModulo) {
    $fondoModulo="fondo-dashboard-contabilidad";
   break;
   case 4:
-   $nombreModulo="PAGINA WEB";
+   $nombreModulo="PAGINA WEB / TIENDA VIRTUAL";
    $cardTema="card-guides";
    $iconoTitulo="list_alt";
    $estiloHome="#4FA54F";
