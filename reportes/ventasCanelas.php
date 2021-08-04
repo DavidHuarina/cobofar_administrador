@@ -53,12 +53,6 @@ $hasta= date("Y-m-t", strtotime($desde));
 <?php
     echo "<select name='proveedor' id='proveedor' data-live-search='true' data-size='6' class='selectpicker form-control' required>";
 $globalAgencia=$_COOKIE["global_agencia"];
-    if($_COOKIE["admin_central"]==1){
-       $sql="select cod_ciudad, descripcion from ciudades where cod_ciudad>0 order by descripcion";    
-    }else{       
-       $sql="select cod_ciudad, descripcion from ciudades where cod_ciudad>0 and cod_ciudad='$globalAgencia' order by descripcion";
-    } 
-
 if($_COOKIE["global_tipo_almacen"]==1){
     $sql1="select DISTINCT p.cod_proveedor, p.nombre_proveedor, pl.margen_precio from proveedores p, proveedores_lineas pl 
       where p.cod_proveedor=pl.cod_proveedor and pl.estado=1 and p.estado_activo=1 and p.cod_proveedor>0 order by 2";
