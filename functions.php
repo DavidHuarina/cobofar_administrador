@@ -10,3 +10,15 @@ function obtenerValorConfiguracionComercial($id){
 	}
 	return($codigo);
 }
+
+function obtenerNombreProveedor($id){
+	$estilosVenta=1;
+	require("conexioncomercial.inc");
+	$sql = "SELECT nombre_proveedor from proveedores c where cod_proveedor=$id";
+	$resp=mysqli_query($enlaceCon,$sql);
+	$codigo=0;
+	while ($dat = mysqli_fetch_array($resp)) {
+	  $codigo=$dat['nombre_proveedor'];
+	}
+	return($codigo);
+}
