@@ -17,4 +17,7 @@ if(isset($_GET['opcion'])){
 		if ($_GET['opcion']=='ventasCanelas') {
 			require_once('reportes/ventasCanelas.php');
 		}
+		if ($_GET['opcion']=='cambioDestino') {
+			require_once('opciones/cambioDestino.php');
+		}
 }		

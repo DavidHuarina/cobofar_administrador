@@ -24,3 +24,63 @@ function buscarFacturaVenta(){
     	});	
 	}
 }
+
+
+$(document).ready(function() {	
+	//SUBMITS
+	$("#cambioDestino").submit(function(e) {
+	  //alert("hola");
+      if($("#sucursal").val()>0){
+        if($("#nro_salida").val()==""&&$("#nro_proceso").val()==""){
+        	alert("Debe ingresar el nro de salida o proceso!");
+        	//Swal.fire("Informativo!", "Debe ingresar el nro de salida o proceso!", "warning");
+        	return false;
+        }else{
+        	if($("#destino").val()>0){
+
+        	}else{
+        		alert("Debe seleccionar la sucursal destino!");
+        		//Swal.fire("Informativo!", "Debe seleccionar la sucursal destino", "warning");
+        		return false;
+        	}
+        }	
+      }else{
+      	alert("Debe seleccionar la Sucursal!");
+        //Swal.fire("Informativo!", "Debe seleccionar la Sucursal!", "warning");
+        return false;
+      }     
+    });
+});
+
+function buscarSalidaDocumento(){
+	//alert("hola");
+      if($("#sucursal").val()>0){
+        if($("#nro_salida").val()==""){
+        	alert("Debe ingresar el nro de salida o proceso!");
+        	//Swal.fire("Informativo!", "Debe ingresar el nro de salida o proceso!", "warning");
+        	return false;
+        }else{
+        	buscarSalidaDocumentoAjax();
+        }	
+      }else{
+      	alert("Debe seleccionar la Sucursal!");
+        //Swal.fire("Informativo!", "Debe seleccionar la Sucursal!", "warning");
+        return false;
+      }
+}
+
+function buscarSalidaDocumentoAjax(){
+	var cod_sucursal=$("#sucursal").val();
+	var nro_salida=$("#nro_salida").val();
+	var parametros={"cod_sucursal":cod_sucursal,"nro_salida":nro_salida};
+  $.ajax({
+        type: "GET",
+        dataType: 'html',
+        url: "opciones/ajaxBuscarDocumentoSalida.php",
+        data: parametros,
+        success:  function (resp) {
+          $("#respuesta").html(resp);
+        }
+  });   
+
+}

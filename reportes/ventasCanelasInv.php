@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../layouts/bodylogin2.php';
 require_once '../conexioncomercial.inc';
 require_once '../functions.php';
