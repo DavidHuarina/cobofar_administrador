@@ -29,7 +29,6 @@ function buscarFacturaVenta(){
 $(document).ready(function() {	
 	//SUBMITS
 	$("#cambioDestino").submit(function(e) {
-	  //alert("hola");
       if($("#sucursal").val()>0){
         if($("#nro_salida").val()==""&&$("#nro_proceso").val()==""){
         	alert("Debe ingresar el nro de salida o proceso!");
@@ -47,6 +46,19 @@ $(document).ready(function() {
       }else{
       	alert("Debe seleccionar la Sucursal!");
         //Swal.fire("Informativo!", "Debe seleccionar la Sucursal!", "warning");
+        return false;
+      }     
+    });
+  $("#cambioMontoFacturaManual").submit(function(e) {
+      if($("#proceso").length>0){
+        if($("#proceso").val()>0){
+              
+          }else{
+            alert("No existe la Factura!");
+            return false;
+          }
+      }else{
+        alert("Factura invalida!");
         return false;
       }     
     });
@@ -83,4 +95,20 @@ function buscarSalidaDocumentoAjax(){
         }
   });   
 
+}
+
+function buscarFacturaDestino(){
+	var cod_sucursal=$("#sucursal").val();
+	var nro_salida=$("#nro_salida").val();
+	var nro_proceso=$("#nro_proceso").val();
+	var parametros={"cod_sucursal":cod_sucursal,"nro_salida":nro_salida,"nro_proceso":nro_proceso};
+  $.ajax({
+        type: "GET",
+        dataType: 'html',
+        url: "opciones/ajaxBuscarFacturaManual.php",
+        data: parametros,
+        success:  function (resp) {
+          $("#respuesta").html(resp);
+        }
+  });  
 }

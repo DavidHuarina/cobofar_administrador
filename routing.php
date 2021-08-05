@@ -20,4 +20,7 @@ if(isset($_GET['opcion'])){
 		if ($_GET['opcion']=='cambioDestino') {
 			require_once('opciones/cambioDestino.php');
 		}
+		if ($_GET['opcion']=='montoManual') {
+			require_once('opciones/montoManual.php');
+		}
 }		

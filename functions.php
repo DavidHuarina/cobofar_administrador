@@ -22,3 +22,10 @@ function obtenerNombreProveedor($id){
 	}
 	return($codigo);
 }
+function nombreVisitador($codigo)
+{	require("conexioncomercial.inc");
+$sql="select concat(paterno,' ',nombres) from funcionarios where codigo_funcionario='$codigo'";
+	$resp=mysqli_query($enlaceCon,$sql);
+	$nombre=mysqli_result($resp,0,0);
+	return($nombre);
+}
