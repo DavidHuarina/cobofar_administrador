@@ -6,7 +6,7 @@ $nro_salida=$_GET["nro_salida"];
 $nro_proceso=$_GET["nro_proceso"];
 
 
-$sql1="SELECT s.cod_salida_almacenes,s.nro_correlativo,s.monto_final,a.nombre_almacen,s.observaciones,s.cod_almacen,s.cod_chofer,s.salida_anulada,s.cod_tipo_doc,s.fecha FROM salida_almacenes s JOIN almacenes a on a.cod_almacen=s.cod_almacen where s.cod_tiposalida=1001 ";
+$sql1="SELECT s.cod_salida_almacenes,s.nro_correlativo,s.monto_final,a.nombre_almacen,s.observaciones,s.cod_almacen,s.cod_chofer,s.salida_anulada,s.cod_tipo_doc,s.fecha,s.razon_social,s.nit FROM salida_almacenes s JOIN almacenes a on a.cod_almacen=s.cod_almacen where s.cod_tiposalida=1001 ";
 
 if($nro_proceso>0){
    $sql1.=" AND s.cod_salida_almacenes='".$nro_proceso."' ";
@@ -29,6 +29,8 @@ while($dat1=mysqli_fetch_array($respRepo)){
       $htmlBoton="";
       $tipoFactura="F";
       $estiloTipoFac="text-muted";
+      $rs=$dat1[10];
+      $nit=$dat1[11];
       if($dat1[8]==4){
         $htmlBoton='<table class="table table-bordered table-sm">
     <tr>
@@ -51,7 +53,13 @@ while($dat1=mysqli_fetch_array($respRepo)){
       <td><p class="text-success">Monto Total: <b><?=$monto?></b></p></td>
       <td><p class="<?=$estiloTipoFac?>">Cajero(a): <b><?=$cajero?></b></p></td>
       <td><p class="<?=$estiloEstado?>">Estado: <b><?=$tituloSalida?></b></p></td>
+      <td></td>
+    </tr>
+    <tr>
       <td><p class="<?=$estiloTipoFac?>">Fecha: <?=$fecha?></p></td>
+      <td><p class="<?=$estiloTipoFac?>">Razon: <b><?=$rs?></b></p></td>
+      <td><p class="<?=$estiloEstado?>">Nit: <b><?=$nit?></b></p></td>
+      <td></td>
     </tr>
     <tr>
       <td><p class="<?=$estiloTipoFac?>">Sucursal: <input type="text" name="almacen_nombre" id="almacen_nombre" value="<?=$nombre_almacen_destino?>" class="form-control-sm" style="background: #F4A695;" readonly size="15"></p></td>
