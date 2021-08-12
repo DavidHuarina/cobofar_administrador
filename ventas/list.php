@@ -16,6 +16,17 @@ $sql="select count(*) from salida_almacenes where cod_tiposalida=1001 and salida
 $resp=mysqli_query($enlaceCon,$sql);
 $total_anuladas=mysqli_result($resp,0,0);
 
+
+
+
+$por_total_efectivo=($total_efectivo*100)/$total_ventas;
+$por_total_tarjeta=($total_tarjeta*100)/$total_ventas;
+$por_total_anuladas=($total_anuladas*100)/$total_ventas;
+
+
+$por_total_efectivo=number_format($por_total_efectivo,0,'','');
+$por_total_tarjeta=number_format($por_total_tarjeta,0,'','');
+$por_total_anuladas=number_format($por_total_anuladas,0,'','');
 ?>
 <div class="pcoded-content">
                       <!-- Page-header start -->
@@ -93,7 +104,7 @@ $total_anuladas=mysqli_result($resp,0,0);
                                                     <div class="card-footer bg-c-green">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
-                                                                <p class="text-white m-b-0">30%</p>
+                                                                <p class="text-white m-b-0"><?=$por_total_efectivo?>%</p>
                                                             </div>
                                                             <div class="col-3 text-right">
                                                                 <i class="fa fa-line-chart text-white f-16"></i>
@@ -118,7 +129,7 @@ $total_anuladas=mysqli_result($resp,0,0);
                                                     <div class="card-footer bg-c-red">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
-                                                                <p class="text-white m-b-0">60%</p>
+                                                                <p class="text-white m-b-0"><?=$por_total_anuladas?>%</p>
                                                             </div>
                                                             <div class="col-3 text-right">
                                                                 <i class="fa fa-line-chart text-white f-16"></i>
@@ -143,7 +154,7 @@ $total_anuladas=mysqli_result($resp,0,0);
                                                     <div class="card-footer bg-c-blue">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
-                                                                <p class="text-white m-b-0">25%</p>
+                                                                <p class="text-white m-b-0"><?=$por_total_tarjeta?>%</p>
                                                             </div>
                                                             <div class="col-3 text-right">
                                                                 <i class="fa fa-card text-white f-16"></i>
