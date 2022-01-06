@@ -1,4 +1,12 @@
 <?php
+header("Pragma: public");
+header("Expires: 0");
+$filename = "CANELAS.xls";
+header("Content-type: application/x-msdownload");
+header("Content-Disposition: attachment; filename=$filename");
+header("Pragma: no-cache");
+header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+
 require_once '../layouts/bodylogin2.php';
 require_once '../conexioncomercial.inc';
 require_once '../functions.php';
@@ -8,6 +16,10 @@ $desde=$_POST["desde"];
 $hasta=$_POST["hasta"];
 $proveedor=$_POST["proveedor"];
 $nombreProv=obtenerNombreProveedor($proveedor);
+
+
+
+
 ?>
 <div class="theme-loader">
         <div class="loader-track">
@@ -109,11 +121,17 @@ $nombreProv=obtenerNombreProveedor($proveedor);
                                                                 <th>SUELTAS</th>
                                                                 <th>MONTO</th>
                                                                 <th>SUCURSAL</th>
+                                                                <?php 
+                                                                    if($proveedor==52){
+                                                                        ?><th>NOMBRE_COMPLETO</th><?php
+                                                                        ?><th>CI</th><?php
+                                                                    }
+                                                                ?>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                         	<?php
-$sql1="SELECT s.cod_chofer,f.nombres,sd.cod_material,m.descripcion_material,sum(sd.cantidad_envase),sum(sd.cantidad_unitaria),sum(sd.monto_unitario),a.nombre_almacen 
+$sql1="SELECT s.cod_chofer,f.nombres,sd.cod_material,m.descripcion_material,sum(sd.cantidad_envase),sum(sd.cantidad_unitaria),sum(sd.monto_unitario),a.nombre_almacen,CONCAT(f.nombres,' ',f.paterno,' ',f.materno)nombre_completo,f.ci
 FROM salida_detalle_almacenes sd
 JOIN salida_almacenes s on s.cod_salida_almacenes=sd.cod_salida_almacen
 join material_apoyo m on m.codigo_material=sd.cod_material
@@ -135,6 +153,8 @@ GROUP BY s.cod_chofer, f.nombres, sd.cod_material, m.descripcion_material, a.nom
     	$cantidad_unitaria=$dat1[5];
     	$monto_unitario=$dat1[6];
     	$nombre_almacen=$dat1[7];
+        $nombre_completo=$dat1['nombre_completo'];
+        $ci=$dat1['ci'];
       ?>
       <tr>
       	<td><?=$cod_chofer?></td>
@@ -144,7 +164,13 @@ GROUP BY s.cod_chofer, f.nombres, sd.cod_material, m.descripcion_material, a.nom
       	<td><?=$cantidad_envase?></td>
       	<td><?=$cantidad_unitaria?></td>
       	<td><?=$monto_unitario?></td>
-      	<td><?=$nombre_almacen?></td>
+      	<td><?=$nombre_almacen?></td>        
+        <?php 
+            if($proveedor==52){
+                ?><td><?=$nombre_completo?></td><?php
+                ?><td><?=$ci?></td><?php
+            }
+        ?>
       </tr>
       <?php
     }

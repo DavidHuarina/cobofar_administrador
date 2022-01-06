@@ -44,7 +44,7 @@ $montoQuitar=($montoCabecera-$monto_modificado);
 </script><?php  
 }?>
 <script type="text/javascript">
-  //window.location.href='../index.php?opcion=montoManual';
+  window.location.href='../index.php?opcion=montoManual';
 </script>
 <?php
 mysqli_close($enlaceCon);

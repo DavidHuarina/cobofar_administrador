@@ -3,12 +3,11 @@ $estilosVenta=0; //para no ejecutar las librerias js css
 require("conexioncomercial.inc");
 $usuario_adm = $_POST["usuario"];
 $contrasena = $_POST["contrasena"];
-$contrasena = str_replace("'", "''", $contrasena);
-
+//$contrasena = str_replace("'", "''", $contrasena);
 $sql = "
     SELECT f.cod_cargo, f.cod_ciudad,u.codigo_funcionario
     FROM funcionarios f, usuarios_sistema u
-    WHERE u.codigo_funcionario=f.codigo_funcionario AND u.usuario='$usuario_adm' AND u.contrasena= BINARY '$contrasena' ";
+    WHERE u.codigo_funcionario=f.codigo_funcionario AND u.usuario='$usuario_adm' AND u.contrasena='$contrasena' ";
 $resp = mysqli_query($enlaceCon,$sql);
 $num_filas = mysqli_num_rows($resp);
 if ($num_filas != 0) {
